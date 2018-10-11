@@ -1,0 +1,83 @@
+{% extends 'base.html'%}
+{% block class_title%}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/classfiy.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<title>写下留言</title>
+{%endblock%}
+{% block content%}
+<canvas id="space">
+</canvas>
+<div class="devaloper-info">
+    <h1>MESSAGE BOARD</h1>
+    <h5>Fan Hao Tian</h5>
+</div>
+<div class="nav">
+    <div class="logo">
+    </div>
+    <ul>
+        <li><a href="/"> 主页</a></li>
+        <li><a href="/classfiy">文章分类</a></li>
+        <li><a href="/project">开源项目</a></li>
+        <li><a href="">写下留言</a></li>
+        <li><a href="/about">关于我的</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="article-list">
+     
+        <footer>
+            <p>SenLanQing的博客 © 2018- future</p>
+            <p>Powered by SenLanQing</p>
+        </footer>
+    </div>
+    <div class="person-info">
+        <div class="info-content">
+            <div class="person-info-logo">
+                <img src="{{url_for('static',filename='img/timg.jpg')}}" alt="">
+            </div>
+            <div class="person-info-name">
+                范浩天（Fan Hao Tian）
+            </div>
+            <div class="person-info-link">
+                <ul>
+                    <li><a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}"
+                                alt="掘金" srcset=""></a> </li>
+                    <li><a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}"
+                                alt="github" srcset=""></a> </li>
+                    <li onclick="show_wechat()"><a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}"
+                                alt="微信" srcset=""></a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="classify-name">
+
+        </div>
+    </div>
+</div>
+{% endblock%}
+{%block script%}
+<script src="{{url_for('static',filename='js/star.js')}}"></script>
+<script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
+<script src="{{url_for('static',filename='js/wchat.js')}}"></script>
+<script>
+    const wechatJson = {
+        "title": "微信二维码", //相册标题
+        "id": 01, //相册id
+        "start": 0, //初始显示的图片序号，默认0
+        "data": [ //相册包含的图片，数组格式
+            {
+                "alt": "二维码",
+                "pid": 01, //图片id
+                "src": wchat, //原图地址
+                "thumb": wchat //缩略图地址
+            }
+        ]
+    }
+    function show_wechat() {
+        layer.photos({
+            photos: wechatJson,
+            anim: 2
+        })
+    }
+</script>
+{%endblock%}

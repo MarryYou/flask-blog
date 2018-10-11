@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+{% block class_title%}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/login.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<title>登录</title>
+{%endblock%}
+{% block content%}
+<div id="world"></div>
+<div class="login">
+        <div class="form-group">
+            <h2 class="form-title">森蓝情丶博客</h2>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="form-user">用户名</label>
+            <input type="text" class="form-control" name="user" id="user" aria-describedby="emailHelp" placeholder="Enter User">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" class="form-pwd">密码</label>
+            <input type="password" class="form-control" name='pwd' id="pwd" placeholder="Password">
+        </div>
+        <button type="button" class="btn btn-primary form-submit">登录</button>
+        <a class="register-user" href="/register">立即注册</a>
+</div>
+{% endblock%}
+{%block script%}
+<script type="text/javascript" src="{{ url_for('static',filename='js/three.min.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/world.js')}}"></script>
+<script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
+<script>
+$(function(){
+    const layer = layui.layer;
+      $('.form-submit').click(function(e){
+          e.stopPropagation();
+          if($('#user').val().trim().length>0||$('#user').val().trim().length>0){
+          let personInfo = JSON.stringify({'username':$('#user').val().trim(),'pwd':$('#pwd').val().trim()})
+          $.ajax({
+              url:'/login/',
+              type:'POST',
+              data:personInfo,
+              dataType:'json',
+              success:function(data){
+                if(data.code == 0){
+                     window.sessionStorage.setItem('status',data.status)
+                      window.location.href = '/home/'
+                  }
+                if(data.code == 1){
+                      layer.msg(data.status)
+                  }
+                if(data.code == 2){
+                      layer.msg(data.status)
+                      $('#user').val('')
+                      $('#pwd').val('')
+                  }
+              },
+              error:function(err){
+                  console.log(err)
+              }
+          })
+          }else{
+              layer.msg('用户名或密码不能为空')
+          }
+
+      })
+})
+</script>
+{%endblock%}

@@ -1,0 +1,156 @@
+{% extends 'base.html'%}
+{% block class_title%}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/comment.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='barrager/css/barrager.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<title>写下留言</title>
+{%endblock%}
+{% block content%}
+<canvas id="space">
+</canvas>
+<div class="devaloper-info">
+    <h1>MESSAGE BOARD</h1>
+    <h5>Fan Hao Tian</h5>
+</div>
+<div class="nav">
+    <div class="logo">
+    </div>
+    <ul>
+        <li><a href="/"> 主页</a></li>
+        <li><a href="/classfiy">文章分类</a></li>
+        <li><a href="/project">开源项目</a></li>
+        <li><a href="">写下留言</a></li>
+        <li><a href="/about">关于我的</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="article-list">
+        <!-- 来必力City版安装代码 -->
+        <div id="lv-container" data-id="city" data-uid="MTAyMC80MDIyNy8xNjc1NA==">
+            <script type="text/javascript">
+                (function (d, s) {
+                    var j, e = d.getElementsByTagName(s)[0];
+
+                    if (typeof LivereTower === 'function') {
+                        return;
+                    }
+
+                    j = d.createElement(s);
+                    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                    j.async = true;
+
+                    e.parentNode.insertBefore(j, e);
+                })(document, 'script');
+            </script>
+            <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+        </div>
+        <!-- City版安装代码已完成 -->
+        <footer>
+            <p>SenLanQing的博客 © 2018- future</p>
+            <p>Powered by SenLanQing</p>
+        </footer>
+    </div>
+    <div class="person-info">
+        <div class="info-content">
+            <div class="person-info-logo">
+                <img src="{{url_for('static',filename='img/timg.jpg')}}" alt="">
+            </div>
+            <div class="person-info-name">
+                范浩天（Fan Hao Tian）
+            </div>
+            <div class="person-info-link">
+                <ul>
+                    <li><a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}"
+                                alt="掘金" srcset=""></a> </li>
+                    <li><a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}"
+                                alt="github" srcset=""></a> </li>
+                    <li onclick="show_wechat()"><a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}"
+                                alt="微信" srcset=""></a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="classify-name">
+
+        </div>
+    </div>
+</div>
+{% endblock%}
+{%block script%}
+<script src="{{url_for('static',filename='js/star.js')}}"></script>
+<script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
+<script src="{{url_for('static',filename='js/wchat.js')}}"></script>
+<script src="{{url_for('static',filename='barrager/js/jquery.barrager.min.js')}}"></script>
+<script>
+    function jQuery1124024789348498718655_1539070661333(data) {
+        window.commentList = data
+    }
+</script>
+<script src="https://api-zero.livere.com/v1/comments/list?callback=jQuery1124024789348498718655_1539070661333&repSeq=4385133&requestPath=%2Fv1%2Fcomments%2Flist&consumerSeq=1020&livereSeq=40227&smartloginSeq=16754&_=1539070661335">
+</script>
+<script>
+    const wechatJson = {
+        "title": "微信二维码", //相册标题
+        "id": 01, //相册id
+        "start": 0, //初始显示的图片序号，默认0
+        "data": [ //相册包含的图片，数组格式
+            {
+                "alt": "二维码",
+                "pid": 01, //图片id
+                "src": wchat, //原图地址
+                "thumb": wchat //缩略图地址
+            }
+        ]
+    }
+    window.onload = function () {
+        let list = window.commentList.results.parents
+        let barragerList = []
+        let personList =[]
+        let tags = ''
+        for (let index = 0; index < list.length; index++) {
+            barragerList.push({
+                info: list[index].content,
+                img: list[index].memberIcon,
+                speed:20,
+                href: 'http://localhost:9999/comment/', //链接
+                color: '#fff', //颜色,默认白色 
+                old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+            })
+            personList.push(list[index].name)
+        }
+        person = new Set(personList)
+        person = [...person]
+        console.log(person)
+        person.forEach(element => {
+             tags +=`<span class="layui-badge layui-bg-gray tag-classify">${element}</span>`
+        });
+        let looper_time = parseInt(Math.random * 15) * 1000;
+        let run_once = true;
+        let index = 0;
+        if (barragerList.length > 0) {
+            barrager();
+            $('.classify-name').html(tags)
+        }
+
+        function barrager() {
+            if (run_once) {
+                //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+                looper = setInterval(barrager, looper_time);
+                run_once = false;
+            }
+            $('body').barrager(barragerList[index]);
+            index++;
+            if (index == barragerList.length) {
+                clearInterval(looper)
+                return false;
+            }
+        }
+    }
+
+    function show_wechat() {
+        layer.photos({
+            photos: wechatJson,
+            anim: 2
+        })
+    }
+</script>
+{%endblock%}

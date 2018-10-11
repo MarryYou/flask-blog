@@ -1,0 +1,198 @@
+{% extends 'base.html'%}
+{% block class_title%}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/create.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='editor/css/editormd.min.css')}}">
+<title>创建博客</title>
+{%endblock%}
+{% block content%}
+<canvas id="space">
+</canvas>
+<div class="devaloper-info">
+    <h1>CREATE OWNER ARTICLE</h1>
+    <h5>Fan Hao Tian</h5>
+</div>
+<div class="nav">
+    <div class="logo">
+    </div>
+    <ul>
+        <li><a href="/"> 主页</a></li>
+        <li><a href="/classfiy">文章分类</a></li>
+        <li><a href="">开源项目</a></li>
+        <li><a href="/comment">写下留言</a></li>
+        <li><a href="/about">关于我的</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="article-list">
+        <div class="title">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" id='article-title' required lay-verify="required" placeholder="请输入标题"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="title">
+            <label class="layui-form-label">类别</label>
+            <div class="layui-input-block">
+                <input type="text" name="classfiy" value id='article-classfiy' required lay-verify="required"
+                    placeholder="请输入类别" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="title">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-block">
+                <textarea name="desc" value id='article-desc' placeholder="请输入简介" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="title">
+            <label class="layui-form-label">日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="date" required lay-verify="required" id="ECalendar_case" value="" placeholder="请选择日期"
+                    autocomplete="off" class="layui-input ECalendar">
+            </div>
+        </div>
+        <div id="article-editormd"></div>
+        <div class="submit-btn">
+            <button class="layui-btn layui-btn-fluid" id="submit-btn">发布文章</button>
+        </div>
+        <footer>
+            <p>SenLanQing的博客 © 2018- future</p>
+            <p>Powered by SenLanQing</p>
+        </footer>
+    </div>
+</div>
+{% endblock%}
+{%block script%}
+<script src="{{url_for('static',filename='js/star.js')}}"></script>
+<script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
+<script src="{{url_for('static',filename='editor/js/editormd.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/wchat.js')}}"></script>
+<script src="{{url_for('static',filename='js/Ecalendar.jquery.min.js')}}"></script>
+<script>
+    const wechatJson = {
+        "title": "微信二维码", //相册标题
+        "id": 01, //相册id
+        "start": 0, //初始显示的图片序号，默认0
+        "data": [ //相册包含的图片，数组格式
+            {
+                "alt": "二维码",
+                "pid": 01, //图片id
+                "src": wchat, //原图地址
+                "thumb": wchat //缩略图地址
+            }
+        ]
+    }
+    $(function () {
+        $("#ECalendar_case").ECalendar({
+            type: "time",
+            stamp: false,
+            skin: 5,
+            format: "yyyy年mm月dd日 hh时ii分",
+            callback: function (v, e) {
+                $(this).val(v)
+            }
+        });
+        var createEditor;
+        const layer = layui.layer;
+        createEditor = editormd("article-editormd", {
+            width: "80%",
+            height: 800,
+            path: '{{url_for("static",filename="editor/lib/")}}',
+            theme: "default",
+            previewTheme: "default",
+            editorTheme: "default",
+            markdown: '',
+            codeFold: true,
+            toolbarIcons: function () {
+                return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote', 'ucwords',
+                    'uppercase', 'lowercase', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                    'list-ul', 'list-ol', 'hr', 'link', 'reference-link', 'image', 'code',
+                    'preformatted-text', 'code-block', 'table', 'datetime', 'html-entities',
+                    'pagebreak', 'goto-line', 'watch', 'preview', 'fullscreen', 'clear',
+                    'search'
+                ]
+            },
+            //syncScrolling : false,
+            saveHTMLToTextarea: true, // 保存 HTML 到 Textarea
+            searchReplace: true,
+            //watch : false,                // 关闭实时预览
+            htmlDecode: "style,script,iframe|on*", // 开启 HTML 标签解析，为了安全性，默认不开启    
+            //toolbar  : false,             //关闭工具栏
+            //previewCodeHighlight : false, // 关闭预览 HTML 的代码块高亮，默认开启
+            emoji: true,
+            taskList: true,
+            tocm: true, // Using [TOCM]
+            tex: true, // 开启科学公式TeX语言支持，默认关闭
+            flowChart: true, // 开启流程图支持，默认关闭
+            sequenceDiagram: true, // 开启时序/序列图支持，默认关闭,
+            //dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+            //dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+            //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+            //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+            //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
+            imageUpload: false,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/create/upload",
+            onload: function () {
+                // console.log('onload', this);
+                //this.fullscreen();
+                //this.unwatch();
+                //this.watch().fullscreen();
+
+                //this.setMarkdown("#PHP");
+                //this.width("100%");
+                //this.height(480);
+                //this.resize("100%", 640);
+            }
+        });
+        $('#submit-btn').click(function () {
+            if ($('#article-title').val().trim().length > 0 &
+                $('#article-classfiy').val().trim().length > 0 &
+                $('#article-desc').val().trim().length > 0 &
+                $('#ECalendar_case').val().trim().length > 0 &
+                createEditor.getHTML().length > 0) {
+                data = JSON.stringify({
+                    'title': $('#article-title').val().trim(),
+                    'classfiy': $('#article-classfiy').val().trim(),
+                    'date': $('#ECalendar_case').val().trim(),
+                    'id': 'art-' + new Date().getTime(),
+                    'desc': $('#article-desc').val().trim(),
+                    'anthor': 'HaoTian Fan',
+                    'markdown':createEditor.getMarkdown(),
+                    'content': createEditor.getHTML()
+                })
+                $.ajax({
+                    url: '/create/',
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.status == 0) {
+                            layer.msg(data.msg, {
+                                icon: 6
+                            });
+                            location.href = '/'
+                        } else {
+                            layer.msg(data.msg, {
+                                icon: 5
+                            });
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            }
+        })
+    })
+
+    function show_wechat() {
+        layer.photos({
+            photos: wechatJson,
+            anim: 2
+        })
+    }
+</script>
+{%endblock%}

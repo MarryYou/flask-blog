@@ -1,0 +1,310 @@
+{%extends 'base.html'%}
+{%block class_title%}
+<link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/about.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='timeline/css/style.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='timeline/css/demo.css')}}">
+<title>关于我的</title>
+{%endblock%}
+{%block content%}
+<canvas id="space">
+</canvas>
+<div class="devaloper-info">
+    <h1>ABOUT ME</h1>
+    <h5>Fan Hao Tian</h5>
+</div>
+<div class="nav">
+    <div class="logo">
+    </div>
+    <ul>
+        <li><a href="/"> 主页</a></li>
+        <li><a href="/classfiy">文章分类</a></li>
+        <li><a href="/project">开源项目</a></li>
+        <li><a href="/comment">写下留言</a></li>
+        <li><a href="">关于我的</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="article-list">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">启蒙经历</li>
+                <li>开发项目(2018年)</li>
+                <li>相亲简介(万年dog)</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <ul class="timeline">
+                        <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-1"><span>2018年</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>南京某x泰公司(web前端开发攻城狮)</h3>
+                                        <p>
+                                            于17年11月入职，主要从事前端web开发，偶尔写一写 NodeJs,工作需要学了vue,写了几个小玩意,这个博客站是用flask
+                                            写的(python),下面是我之前小玩意的链接：<br />
+                                            VUE + Express: <br> https://59.110.243.107:8081 <br /><br />
+                                            NUXT.JS + Express: <br> https://59.110.243.107:8082 <br /><br />
+                                            HEXO :<br> https://59.110.243.107:8083 <br /><br />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <input type="radio" name="tl-group" />
+                            <label></label>
+                            <div class="thumb user-2"><span>2017年</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>常州某x公司(切图仔)</h3>
+                                        <p>于17年10月离开由大学导师推的公司,从一个Android 转到了web前端开发。在这期间做了一些moblie web
+                                            ,让我这个切图仔知道了除了jquery之外的许多东西，什么viewprot啊zepoto啊，也爬了许多手机端的坑，但是那段时间吸收知识是最快的。一句话总结就是痛并快乐着！！！</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <input type="radio" name="tl-group" />
+                            <label></label>
+                            <div class="thumb user-3"><span>2016年</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>常州某x人力资源公司(Andorid)</h3>
+                                        <p>
+                                            于17年初离开的这家当时出校门自己找的公司，校招的时候自己找的，本来原意是干我大学学的老本行，后来就做着做着就往前端发展了，因为是小公司，所以一个人身兼数职。那时候就仅凭这大学学的html，css
+                                            。总算是给搞出来了，js都是人家的，自己是一脸懵逼。
+                                            这里是我前端启蒙的地方，后来由于很多其他因素，离开了这个前端梦开始的地方。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <input type="radio" name="tl-group" />
+                            <label></label>
+                            <div class="thumb user-4"><span>大学生涯</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>常州某信技术学院</h3>
+                                        <p>
+                                            年轻时候贪玩，本来是搞艺术的，不知道咋的就稀里糊涂的学了编程。大学和许多人一样混混日子，高数是我的死穴，很惭愧，大学的高数基本都是挂了。也就是专业课能让我觉得这学没白上。那时候也天天LOL
+                                            ，很遗憾的是没谈过恋爱（万年单身dog）。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layui-tab-item">
+                    <ul class="timeline">
+                        <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-5"><span>2018年</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>基于fasttext代码泄露检测</h3>
+                                        <p>
+                                        1.	项目描述：<br>
+                                        基于自动化以及FASTTEXT 检测代码在网上的疑似泄露地址<br>
+                                        2.	技术内容：<br>
+                                        Python  flask  vue  element  fasttext  scrapy  mongodb<br>
+                                        4.	开发范围和要求：<br>
+                                        a)	开发关键字及泄露可疑网址的双路由网站<br>
+                                        b)	实现对不同语言的语法package包提取<br>
+                                        c)	实现路由管理用户权限系统<br>
+                                        d)	本地上传以及git svn仓库上传项目的开发<br>
+                                        e)	为网站开发中日英国际化<br>
+                                        f)	服务器nginx 网站的部署与测试<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-6"><span>2018年</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>基于NodeJS的youtube视频字幕解析</h3>
+                                        <p>
+                                        1.	项目描述：<br>
+                                        项目主要负责的是youtube视频的字幕解析工作，通过youtube官方 或第三方 获取youtube视频的字幕 实现字幕的编辑、 log字幕操作日志、 根据最小编辑距离生成词典、 自动分段 、手动分段 以及语音转字幕的实现<br>
+                                        2.	技术内容：<br>
+                                        nodejs  html , css  , js , jquery ,bootsrap <br>
+                                        4.	开发范围和要求：<br>
+                                        a)	设计实现youtube视频字幕 分段模块<br>
+                                        b)	设计实现基于字幕分段的游标卡尺插件<br>
+                                        c)	调整优化首页字幕列表的显示与查询<br>
+                                        d)	完成了字幕语言切换模块<br>
+                                        e)	代码优化 模块化开发功能代码<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-7"><span>2018年</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>nodejs + vue 版 curation社区</h3>
+                                        <p>
+                                        1.	项目描述：<br>
+                                       一款公司内部员工交流与分享的社区<br>
+                                        2.	技术内容：<br>
+                                         vue ，element，jquery，mongodb，三板斧<br>
+                                        4.	开发范围和要求：<br>
+                                        a)	社区的样式设计和实现<br>
+                                        b)	社区的富文本编辑器 生成的类型集成设计<br>
+                                        c)	社区的评论系统设计与优化<br>
+                                        d)	社区的slideshare 播放器的设计与实现<br>
+                                        e)	社区管理员权限路由的设计<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layui-tab-item">
+                    <ul class="timeline">
+                       <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-7"><span>基本信息</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>basic information</h3>
+                                        <p>
+                                         姓名:&nbsp;HaoTian Fan <br>
+                                         年龄:&nbsp;23 <br>
+                                         邮箱:&nbsp;614345508@qq.com <br>
+                                         所在地:&nbsp;江苏南京<br>                                        
+                                         状态:&nbsp;单身dog<br>                                        
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                     <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-8"><span>兴趣爱好</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>hobbies & interests</h3>
+                                        <p>
+                                         唱歌 <br>
+                                         LOL(专业辅助 20年稳定不坑) <br>
+                                         看电影 <br>
+                                         撸代码(每个月总有那么两三天)<br>                                        
+                                         撸串<br>                                        
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                         <li class="event">
+                            <input type="radio" name="tl-group"  />
+                            <label></label>
+                            <div class="thumb user-4"><span>编程技能</span></div>
+                            <div class="content-perspective">
+                                <div class="content">
+                                    <div class="content-inner">
+                                        <h3>program knowledge</h3>
+                                        <p>
+                                         python(web开发、爬虫、刚接触一点机器学习) <br>
+                                         falsk(本博客的实现框架)<br>
+                                         mongodb(现阶段常用数据库) <br>
+                                         vue(工作中经常用)<br>                                        
+                                         react(看过一段时间的react教程)<br>                                        
+                                         scarpy(一个python的爬虫框架)<br>                                        
+                                         express(一个nodejs的框架)<br>                                        
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="person-info">
+        <div class="info-content">
+            <div class="person-info-logo">
+                <img src="{{url_for('static',filename='img/timg.jpg')}}" alt="">
+            </div>
+            <div class="person-info-name">
+                范浩天（Fan Hao Tian）
+            </div>
+            <div class="person-info-link">
+                <ul>
+                    <li><a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}"
+                                alt="掘金" srcset=""></a> </li>
+                    <li><a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}"
+                                alt="github" srcset=""></a> </li>
+                    <li onclick="show_wechat()"><a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}"
+                                alt="微信" srcset=""></a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="classify-name">
+            <span class="layui-badge layui-bg-gray tag-classify">python</span>
+            <span class="layui-badge layui-bg-gray tag-classify">flask</span>
+            <span class="layui-badge layui-bg-gray tag-classify">scarpy</span>
+            <span class="layui-badge layui-bg-gray tag-classify">mongodb</span>
+            <span class="layui-badge layui-bg-gray tag-classify">nodejs</span>
+            <span class="layui-badge layui-bg-gray tag-classify">vue</span>
+            <span class="layui-badge layui-bg-gray tag-classify">react</span>
+            <span class="layui-badge layui-bg-gray tag-classify">webpack</span>
+            <span class="layui-badge layui-bg-gray tag-classify">git/svn</span>
+            <span class="layui-badge layui-bg-gray tag-classify">mui</span>
+        </div>
+    </div>
+</div>
+{%endblock%}
+{%block script%}
+<script src="{{url_for('static',filename='js/star.js')}}"></script>
+<script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
+<script src="{{url_for('static',filename='timeline/js/modernizr.custom.63321.js')}}"></script>
+<script src="{{url_for('static',filename='js/wchat.js')}}"></script>
+<script>
+    const wechatJson = {
+        "title": "微信二维码", //相册标题
+        "id": 01, //相册id
+        "start": 0, //初始显示的图片序号，默认0
+        "data": [ //相册包含的图片，数组格式
+            {
+                "alt": "二维码",
+                "pid": 01, //图片id
+                "src": wchat, //原图地址
+                "thumb": wchat //缩略图地址
+            }
+        ]
+    }
+
+    function show_wechat() {
+        layer.photos({
+            photos: wechatJson,
+            anim: 2
+        })
+    }
+</script>
+{%endblock%}
