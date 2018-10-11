@@ -41,6 +41,13 @@
             </div>
         </div>
         <div class="title">
+            <label class="layui-form-label">封面</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" id='article-cover' required lay-verify="required" placeholder="请输入url"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="title">
             <label class="layui-form-label">简介</label>
             <div class="layui-input-block">
                 <textarea name="desc" value id='article-desc' placeholder="请输入简介" class="layui-textarea"></textarea>
@@ -159,8 +166,9 @@
                     'date': $('#ECalendar_case').val().trim(),
                     'id': 'art-' + new Date().getTime(),
                     'desc': $('#article-desc').val().trim(),
+                    'cover': $('#article-cover').val().trim() || '',
                     'anthor': 'HaoTian Fan',
-                    'markdown':createEditor.getMarkdown(),
+                    'markdown': createEditor.getMarkdown(),
                     'content': createEditor.getHTML()
                 })
                 $.ajax({

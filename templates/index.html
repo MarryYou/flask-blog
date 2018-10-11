@@ -24,13 +24,30 @@
 </div>
 <div class="content">
     <div class="article-list">
-{% for article in Articles%}
-<div>
-    {% autoescape false %}
-    {{article['desc']}}
-    {% endautoescape %}
-</div>
-{%endfor%}
+        {% for article in Articles%}
+        <div class="art-card">
+            <h3 class="art-tit"><a href="">{{article['title']}}</a> </h3>
+            {% if article['cover'] != ''%}
+            <img class="art-cover" src="{{article['cover']}}" alt="">
+            {%endif%}
+            <p class="art-desc">{{article['desc']}}</p>
+            <div class="art-update">
+                <div class="art-classfiy">
+                    <span class="layui-badge layui-bg-gray tag-classify">{{article['classfiy']}}</span>
+                </div>
+                <div class="art-time">
+                    <i class="layui-icon layui-icon-log"></i>&nbsp;&nbsp;<span>{{article['date']}}</span>
+                </div>
+            </div>
+            <!-- {% autoescape false %}
+            {{article['desc']}}
+            {% endautoescape %} -->
+        </div>
+        {%endfor%}
+        <footer>
+            <p>SenLanQing的博客 © 2018- future</p>
+            <p>Powered by SenLanQing</p>
+        </footer>
     </div>
     <div class="person-info">
         <div class="info-content">
@@ -52,13 +69,9 @@
             </div>
         </div>
         <div class="classify-name">
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端</span>
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端w</span>
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端wq</span>
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端1211</span>
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端dasdada</span>
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端dsadasdsdassadada</span>
-            <span  class="layui-badge layui-bg-gray tag-classify">web前端das</span>
+            {% for classfiy in Articles %}
+            <span class="layui-badge layui-bg-gray tag-classify">{{classfiy['classfiy']}}</span>
+            {%endfor%}
         </div>
     </div>
 </div>
