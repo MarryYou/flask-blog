@@ -12,7 +12,7 @@ def getGithub():
         'https': '10.167.219.228:8118'
     }
     res = requests.get(url='https://github.com/MarryYou?tab=repositories',
-                       headers=headers)
+                       headers=headers,proxies=proxies)
     if res.status_code == 200:
         res.encoding = 'utf-8'
         html = BeautifulSoup(res.text, 'lxml').find(

@@ -1,10 +1,8 @@
-{% extends 'base.html'%}
-{% block class_title%}
+{% extends 'base.html'%} {% block class_title%}
 <link rel="stylesheet" href="{{ url_for('static',filename='css/classfiy.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
 <title>写下留言</title>
-{%endblock%}
-{% block content%}
+{%endblock%} {% block content%}
 <canvas id="space">
 </canvas>
 <div class="devaloper-info">
@@ -13,6 +11,8 @@
 </div>
 <div class="nav">
     <div class="logo">
+        <img src="https://avatars3.githubusercontent.com/u/17715691?s=40&v=4" style="width:100%;" alt="avatar">
+
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
@@ -24,7 +24,7 @@
 </div>
 <div class="content">
     <div class="article-list">
-     
+
         <footer>
             <p>SenLanQing的博客 © 2018- future</p>
             <p>Powered by SenLanQing</p>
@@ -40,12 +40,15 @@
             </div>
             <div class="person-info-link">
                 <ul>
-                    <li><a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}"
-                                alt="掘金" srcset=""></a> </li>
-                    <li><a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}"
-                                alt="github" srcset=""></a> </li>
-                    <li onclick="show_wechat()"><a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}"
-                                alt="微信" srcset=""></a> </li>
+                    <li>
+                        <a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}" alt="掘金" srcset=""></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}" alt="github" srcset=""></a>
+                    </li>
+                    <li onclick="show_wechat()">
+                        <a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}" alt="微信" srcset=""></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -54,8 +57,7 @@
         </div>
     </div>
 </div>
-{% endblock%}
-{%block script%}
+{% endblock%} {%block script%}
 <script src="{{url_for('static',filename='js/star.js')}}"></script>
 <script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
 <script src="{{url_for('static',filename='js/wchat.js')}}"></script>
@@ -73,6 +75,7 @@
             }
         ]
     }
+
     function show_wechat() {
         layer.photos({
             photos: wechatJson,
@@ -80,4 +83,4 @@
         })
     }
 </script>
-{%endblock%}
+<img src="https://avatars3.githubusercontent.com/u/17715691?s=40&v=4" style="width:100%;" alt="avatar"> {%endblock%}

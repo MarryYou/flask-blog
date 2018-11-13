@@ -1,10 +1,8 @@
-{%extends 'base.html'%}
-{%block class_title%}
+{%extends 'base.html'%} {%block class_title%}
 <link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
 <title>主页</title>
-{%endblock%}
-{%block content%}
+{%endblock%} {%block content%}
 <canvas id="space">
 </canvas>
 <div class="devaloper-info">
@@ -13,6 +11,7 @@
 </div>
 <div class="nav">
     <div class="logo">
+        <img src="https://avatars3.githubusercontent.com/u/17715691?s=40&v=4" style="width:100%;" alt="avatar">
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
@@ -26,10 +25,10 @@
     <div class="article-list">
         {% for article in Articles%}
         <div class="art-card">
-            <h3 class="art-tit"><a href="">{{article['title']}}</a> </h3>
+            <h3 class="art-tit"><a href="{{url_for('/page.main',title=article['title'] )}}">{{article['title']}}</a>
+            </h3>
             {% if article['cover'] != ''%}
-            <img class="art-cover" src="{{article['cover']}}" alt="">
-            {%endif%}
+            <img class="art-cover" src="{{article['cover']}}" alt=""> {%endif%}
             <p class="art-desc">{{article['desc']}}</p>
             <div class="art-update">
                 <div class="art-classfiy">
@@ -59,24 +58,25 @@
             </div>
             <div class="person-info-link">
                 <ul>
-                    <li><a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}"
-                                alt="掘金" srcset=""></a> </li>
-                    <li><a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}"
-                                alt="github" srcset=""></a> </li>
-                    <li onclick="show_wechat()"><a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}"
-                                alt="微信" srcset=""></a> </li>
+                    <li>
+                        <a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}" alt="掘金" srcset=""></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}" alt="github" srcset=""></a>
+                    </li>
+                    <li onclick="show_wechat()">
+                        <a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}" alt="微信" srcset=""></a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="classify-name">
             {% for classfiy in Articles %}
-            <span class="layui-badge layui-bg-gray tag-classify">{{classfiy['classfiy']}}</span>
-            {%endfor%}
+            <span class="layui-badge layui-bg-gray tag-classify">{{classfiy['classfiy']}}</span> {%endfor%}
         </div>
     </div>
 </div>
-{%endblock%}
-{%block script%}
+{%endblock%} {%block script%}
 <script src="{{url_for('static',filename='js/star.js')}}"></script>
 <script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
 <script src="{{url_for('static',filename='js/wchat.js')}}"></script>

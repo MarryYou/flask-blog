@@ -1,12 +1,10 @@
-{% extends 'base.html'%}
-{% block class_title%}
+{% extends 'base.html'%} {% block class_title%}
 <link rel="stylesheet" href="{{ url_for('static',filename='css/create.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='editor/css/editormd.min.css')}}">
 <title>创建博客</title>
-{%endblock%}
-{% block content%}
+{%endblock%} {% block content%}
 <canvas id="space">
 </canvas>
 <div class="devaloper-info">
@@ -15,6 +13,7 @@
 </div>
 <div class="nav">
     <div class="logo">
+        <img src="https://avatars3.githubusercontent.com/u/17715691?s=40&v=4" style="width:100%;" alt="avatar">
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
@@ -29,22 +28,19 @@
         <div class="title">
             <label class="layui-form-label">标题</label>
             <div class="layui-input-block">
-                <input type="text" name="title" id='article-title' required lay-verify="required" placeholder="请输入标题"
-                    autocomplete="off" class="layui-input">
+                <input type="text" name="title" id='article-title' required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="title">
             <label class="layui-form-label">类别</label>
             <div class="layui-input-block">
-                <input type="text" name="classfiy" value id='article-classfiy' required lay-verify="required"
-                    placeholder="请输入类别" autocomplete="off" class="layui-input">
+                <input type="text" name="classfiy" value id='article-classfiy' required lay-verify="required" placeholder="请输入类别" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="title">
             <label class="layui-form-label">封面</label>
             <div class="layui-input-block">
-                <input type="text" name="title" id='article-cover' required lay-verify="required" placeholder="请输入url"
-                    autocomplete="off" class="layui-input">
+                <input type="text" name="title" id='article-cover' required lay-verify="required" placeholder="请输入url" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="title">
@@ -56,8 +52,7 @@
         <div class="title">
             <label class="layui-form-label">日期</label>
             <div class="layui-input-block">
-                <input type="text" name="date" required lay-verify="required" id="ECalendar_case" value="" placeholder="请选择日期"
-                    autocomplete="off" class="layui-input ECalendar">
+                <input type="text" name="date" required lay-verify="required" id="ECalendar_case" value="" placeholder="请选择日期" autocomplete="off" class="layui-input ECalendar">
             </div>
         </div>
         <div id="article-editormd"></div>
@@ -70,8 +65,7 @@
         </footer>
     </div>
 </div>
-{% endblock%}
-{%block script%}
+{% endblock%} {%block script%}
 <script src="{{url_for('static',filename='js/star.js')}}"></script>
 <script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
 <script src="{{url_for('static',filename='editor/js/editormd.min.js')}}"></script>
@@ -91,13 +85,13 @@
             }
         ]
     }
-    $(function () {
+    $(function() {
         $("#ECalendar_case").ECalendar({
             type: "time",
             stamp: false,
             skin: 5,
             format: "yyyy年mm月dd日 hh时ii分",
-            callback: function (v, e) {
+            callback: function(v, e) {
                 $(this).val(v)
             }
         });
@@ -112,7 +106,7 @@
             editorTheme: "default",
             markdown: '',
             codeFold: true,
-            toolbarIcons: function () {
+            toolbarIcons: function() {
                 return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote', 'ucwords',
                     'uppercase', 'lowercase', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
                     'list-ul', 'list-ol', 'hr', 'link', 'reference-link', 'image', 'code',
@@ -142,7 +136,7 @@
             imageUpload: false,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL: "/create/upload",
-            onload: function () {
+            onload: function() {
                 // console.log('onload', this);
                 //this.fullscreen();
                 //this.unwatch();
@@ -154,7 +148,7 @@
                 //this.resize("100%", 640);
             }
         });
-        $('#submit-btn').click(function () {
+        $('#submit-btn').click(function() {
             if ($('#article-title').val().trim().length > 0 &
                 $('#article-classfiy').val().trim().length > 0 &
                 $('#article-desc').val().trim().length > 0 &
@@ -176,7 +170,7 @@
                     type: 'POST',
                     data: data,
                     dataType: 'json',
-                    success: function (data) {
+                    success: function(data) {
                         if (data.status == 0) {
                             layer.msg(data.msg, {
                                 icon: 6
@@ -188,7 +182,7 @@
                             });
                         }
                     },
-                    error: function (err) {
+                    error: function(err) {
                         console.log(err)
                     }
                 })

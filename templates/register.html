@@ -1,11 +1,9 @@
-{% extends 'base.html'%}
-{% block class_title%}
+{% extends 'base.html'%} {% block class_title%}
 <link rel="stylesheet" href="{{ url_for('static',filename='css/register.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap-fileinput.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
 <title>注册</title>
-{%endblock%}
-{% block content%}
+{%endblock%} {% block content%}
 <div id="world"></div>
 <div class="regitser">
     <div class="form-group">
@@ -31,15 +29,14 @@
         <label for="avatar" class="form-pwd">头像上传</label>
         <div class="fileinput  fileinput-new" data-provides="fileinput" id="exampleInputUpload">
             <div class="fileinput-new thumbnail" style="width: 250px;height: auto;max-height:200px;">
-                <img src="{{url_for('static',filename='img/noimage.png') }}" id="picImg" style="width: 100%;height: auto;max-height: 140px;"
-                    alt="">
+                <img src="{{url_for('static',filename='img/noimage.png') }}" id="picImg" style="width: 100%;height: auto;max-height: 140px;" alt="">
             </div>
             <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 300px; max-height: 200px;"></div>
             <div style="margin:6px 0;">
                 <span class="btn btn-primary btn-file">
                     <span class="fileinput-new">选择文件</span>
-                    <span class="fileinput-exists">换一张</span>
-                    <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png">
+                <span class="fileinput-exists">换一张</span>
+                <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png">
                 </span>
                 <button class="btn btn-success fileinput-exists" id='upload_avatar' style="margin:0 10px;">确定</button>
                 <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
@@ -49,57 +46,56 @@
     <button type="button" class="btn btn-primary form-submit">注册</button>
     <a class="register-user" href="/login">立即登录</a>
 </div>
-{% endblock%}
-{%block script%}
+{% endblock%} {%block script%}
 <script src="{{url_for('static',filename='js/bootstrap-fileinput.js')}}"></script>
 <script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
 <script>
-    $(function () {
+    $(function() {
         const layer = layui.layer;
-        $('#upload_avatar')[0].addEventListener('click', function (e) {
+        $('#upload_avatar')[0].addEventListener('click', function(e) {
             e.stopPropagation();
             let element = document.getElementById('picID');
             element.setAttribute('bs_url', element.files[0].result)
         }, false)
-        $('#user').blur(function () {
+        $('#user').blur(function() {
             if ($(this).val().trim().length > 0) {
-                let  uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
-                let flag = uPattern.test($(this).val().trim()) 
-                if(flag == false){
-                    layer.tips('用户名限制在4到16位（字母，数字，下划线，减号）','#user')
+                let uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+                let flag = uPattern.test($(this).val().trim())
+                if (flag == false) {
+                    layer.tips('用户名限制在4到16位（字母，数字，下划线，减号）', '#user')
                     $(this).val('')
                 }
             }
         })
-        $('#email').blur(function () {
+        $('#email').blur(function() {
             if ($(this).val().trim().length > 0) {
-                let  ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-                let flag = ePattern.test($(this).val().trim()) 
-                if(flag == false){
-                    layer.tips('邮箱格式输入不正确，请重新输入！','#email')
-                    $(this).val('')      
+                let ePattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                let flag = ePattern.test($(this).val().trim())
+                if (flag == false) {
+                    layer.tips('邮箱格式输入不正确，请重新输入！', '#email')
+                    $(this).val('')
                 }
             }
         })
-        $('#pwd').blur(function () {
+        $('#pwd').blur(function() {
             if ($(this).val().trim().length > 0) {
-                let  pPattern = /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
+                let pPattern = /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
                 let flag = pPattern.test($(this).val().trim())
-                if(flag == false){
-                    layer.tips('密码6-20位，由数字和字母组成','#pwd')
-                    $(this).val('')                  
+                if (flag == false) {
+                    layer.tips('密码6-20位，由数字和字母组成', '#pwd')
+                    $(this).val('')
                 }
             }
         })
-         $('#repwd').blur(function () {
+        $('#repwd').blur(function() {
             if ($(this).val().trim().length > 0 && $('#pwd').val().trim().length > 0) {
-                if($(this).val().trim() !== $('#pwd').val().trim()){
-                    layer.tips('两次输入的密码不正确，请重新输入','#repwd')
-                    $(this).val('')                  
+                if ($(this).val().trim() !== $('#pwd').val().trim()) {
+                    layer.tips('两次输入的密码不正确，请重新输入', '#repwd')
+                    $(this).val('')
                 }
             }
         })
-        $('.form-submit')[0].addEventListener('click', function (e) {
+        $('.form-submit')[0].addEventListener('click', function(e) {
             e.stopPropagation();
             let personInfo = {
                 username: $('#user').val().trim(),
@@ -109,25 +105,25 @@
             }
             if (personInfo.username.length > 0 && personInfo.email.length > 0 && personInfo.pwd.length >
                 0) {
-                    $.ajax({
-                        url:'/register/',
-                        type:'POST',
-                        data: JSON.stringify(personInfo),
-                        dataType:'json',
-                        success:function(data){
-                             if(data.code == 0){
-                                layer.msg(data.status)
-                                window.location.href = '/login'
-                             }else{
-                                  layer.msg(data.status)
-                             }
-                        },
-                        error:function(err){
-                            console.log(err)
+                $.ajax({
+                    url: '/register/',
+                    type: 'POST',
+                    data: JSON.stringify(personInfo),
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.code == 0) {
+                            layer.msg(data.status)
+                            window.location.href = '/login'
+                        } else {
+                            layer.msg(data.status)
                         }
+                    },
+                    error: function(err) {
+                        console.log(err)
+                    }
 
-                    })
-                }
+                })
+            }
 
         }, false)
     })
