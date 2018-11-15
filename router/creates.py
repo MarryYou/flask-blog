@@ -15,12 +15,12 @@ def main():
     if request.method == "GET":
         return render_template("create.html")
     else:
-        database.setDB("owner_classify")
-        database.setCollection("class")
-        database.add_one({"class_name": article["classfiy"]})
         database.setDB("owner_article")
         database.setCollection("article")
         article = json.loads(request.get_data())
+        database.setDB("owner_classify")
+        database.setCollection("class")
+        database.add_one({"class_name": article["classfiy"]})
         try:
             database.add_one(article)
             return jsonify({"status": 0, "msg": "保存成功!", "id": article["id"]})
