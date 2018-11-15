@@ -19,7 +19,7 @@ def main():
         database.setDB("owner_classify")
         database.setCollection("class")
         data = database.find({"class_name": article["classfiy"]})
-        if len(data) != 0:
+        if len(data) == 0:
             database.add_one({"class_name": article["classfiy"]})
         database.setDB("owner_article")
         database.setCollection("article")
