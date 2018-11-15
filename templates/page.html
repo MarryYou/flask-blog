@@ -16,7 +16,6 @@
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
-        <li><a href="classfiy">文章分类</a></li>
         <li><a href="project">开源项目</a></li>
         <li><a href="comment">写下留言</a></li>
         <li><a href="about">关于我的</a></li>
@@ -24,6 +23,9 @@
 </div>
 <div class="content">
     <div class="article-content">
+        {%if Article['cover'] != '' %}
+        <img src="{{Article['cover']}}"/>
+        {% endif %}
         {% autoescape false %} {{Article['content']}} {% endautoescape %}
     </div>
     <div class="person-info">
@@ -51,6 +53,18 @@
         <div class="classify-name">
             {% for classfiy in Articles %}
             <span class="layui-badge layui-bg-gray tag-classify">{{classfiy['classfiy']}}</span> {%endfor%}
+        </div>
+    </div>
+    <div class="recommend">
+        <div class="recommend-name">
+            推荐文章
+        </div>
+        <div class="recommend-news">
+            {% for recommend_article in recommend%}
+            <div class="recommend-content">
+                <a href="/page?title={{recommend_article['title']}}">{{recommend_article['title']}}</a>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

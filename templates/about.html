@@ -18,7 +18,6 @@
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
-        <li><a href="/classfiy">文章分类</a></li>
         <li><a href="/project">开源项目</a></li>
         <li><a href="/comment">写下留言</a></li>
         <li><a href="">关于我的</a></li>
@@ -109,7 +108,8 @@
                                         <h3>基于fasttext代码泄露检测</h3>
                                         <p>
                                             1. 项目描述：<br> 基于自动化以及FASTTEXT 检测代码在网上的疑似泄露地址<br> 2. 技术内容：<br> Python flask vue element fasttext scrapy mongodb<br> 4. 开发范围和要求：<br> a) 开发关键字及泄露可疑网址的双路由网站
-                                            <br> b) 实现对不同语言的语法package包提取<br> c) 实现路由管理用户权限系统<br> d) 本地上传以及git svn仓库上传项目的开发<br> e) 为网站开发中日英国际化<br> f) 服务器nginx 网站的部署与测试<br>
+                                            <br> b) 实现对不同语言的语法package包提取<br> c) 实现路由管理用户权限系统<br> d) 本地上传以及git svn仓库上传项目的开发
+                                            <br> e) 为网站开发中日英国际化<br> f) 服务器nginx 网站的部署与测试<br>
                                         </p>
                                     </div>
                                 </div>
@@ -142,7 +142,8 @@
                                         <p>
                                             1. 项目描述：<br> 一款公司内部员工交流与分享的社区
                                             <br> 2. 技术内容：<br> vue ，element，jquery，mongodb，三板斧<br> 4. 开发范围和要求：<br> a) 社区的样式设计和实现
-                                            <br> b) 社区的富文本编辑器 生成的类型集成设计<br> c) 社区的评论系统设计与优化<br> d) 社区的slideshare 播放器的设计与实现<br> e) 社区管理员权限路由的设计<br>
+                                            <br> b) 社区的富文本编辑器 生成的类型集成设计<br> c) 社区的评论系统设计与优化<br> d) 社区的slideshare 播放器的设计与实现
+                                            <br> e) 社区管理员权限路由的设计<br>
                                         </p>
                                     </div>
                                 </div>
@@ -246,8 +247,21 @@
             <span class="layui-badge layui-bg-gray tag-classify">mui</span>
         </div>
     </div>
+    <div class="recommend">
+        <div class="recommend-name">
+            推荐文章
+        </div>
+        <div class="recommend-news">
+            {% for recommend_article in recommend%}
+            <div class="recommend-content">
+                <a href="/page?title={{recommend_article['title']}}">{{recommend_article['title']}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
-{%endblock%} {%block script%}
+{%endblock%} 
+{%block script%}
 <script src="{{url_for('static',filename='js/star.js')}}"></script>
 <script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
 <script src="{{url_for('static',filename='timeline/js/modernizr.custom.63321.js')}}"></script>
@@ -274,4 +288,4 @@
         })
     }
 </script>
-{%endblock%}
+{%endblock%} 

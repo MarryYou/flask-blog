@@ -1,0 +1,148 @@
+{%extends 'base.html'%} {%block class_title%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<title>管理页</title>
+{%endblock%} {%block content%}
+<canvas id="space">
+</canvas>
+<div class="devaloper-info">
+    <h1>WEB DEVELOPER</h1>
+    <h5>Fan Hao Tian</h5>
+</div>
+<div class="nav">
+    <div class="logo">
+        <img src="https://avatars3.githubusercontent.com/u/17715691?s=40&v=4" style="width:100%;" alt="avatar">
+    </div>
+    <ul>
+        <li><a href="/"> 主页</a></li>
+        <li><a href="project">开源项目</a></li>
+        <li><a href="comment">写下留言</a></li>
+        <li><a href="about">关于我的</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="article-list">
+        {% for article in Articles%}
+        <div class="art-card">
+            <h3 class="art-tit"><a href="{{url_for('/page.main',title=article['title'] )}}">{{article['title']}}</a>
+            </h3>
+            {% if article['cover'] != ''%}
+            <img class="art-cover" src="{{article['cover']}}" alt=""> {%endif%}
+            <p class="art-desc">{{article['desc']}}</p>
+            <div class="art-update">
+                <div class="art-classfiy">
+                    <span class="layui-badge layui-bg-gray tag-classify">{{article['classfiy']}}</span>
+                </div>
+                <div class="art-time">
+                    <i class="layui-icon layui-icon-log"></i>&nbsp;&nbsp;<span>{{article['date']}}</span>
+                </div>
+            </div>
+            <!-- {% autoescape false %}
+            {{article['desc']}}
+            {% endautoescape %} -->
+        </div>
+        {%endfor%}
+        <div class="art-pagination">
+        {% if tag == 'ALL'%}
+          {% if page == 1%}
+         <button style="margin: 0 10px;" class="layui-btn layui-btn-lg    layui-btn-disabled" disabled><i class="layui-icon"></i> prev </button>
+          {% else %}
+          <a href="/home?page={{page - 1}}"><button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal  "><i class="layui-icon"></i>prev </button></a>
+          {% endif %}
+          {% if page == total or total == 0 %}
+         <button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal layui-btn-disabled" disabled><i class="layui-icon"></i>next</button>
+          {% else %}
+         <a href="/home?page={{page + 1}}"><button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal "><i class="layui-icon"></i> next </button></a>
+          {% endif %}
+        {% else %}
+          {% if page == 1%}
+         <button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal  layui-btn-disabled" disabled><i class="layui-icon"></i> prev </button>
+          {% else %}
+         <a href="/home?tag={{tag}}&page={{page - 1}}"><button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal  "><i class="layui-icon"></i> prev</button></a> 
+          {% endif %}
+
+          {% if total == 0 or page == total%}
+         <button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal layui-btn-disabled" disabled><i class="layui-icon"></i> next </button>
+          {% else %}
+        <a href="/home?tag={{tag}}&page={{page + 1}}">  <button style="margin: 0 10px;" class="layui-btn layui-btn-lg  layui-btn-normal "><i class="layui-icon"></i>next </button></a>
+          {% endif %}
+        {% endif %}
+         </div>      
+        <footer>
+            <p>SenLanQing的博客 © 2018- future</p>
+            <p>Powered by SenLanQing</p>
+        </footer>
+    </div>
+    <div class="person-info">
+        <div class="info-content">
+            <div class="person-info-logo">
+                <img src="{{url_for('static',filename='img/timg.jpg')}}" alt="">
+            </div>
+            <div class="person-info-name">
+                范浩天（Fan Hao Tian）
+            </div>
+            <div class="person-info-link">
+                <ul>
+                    <li>
+                        <a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}" alt="掘金" srcset=""></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}" alt="github" srcset=""></a>
+                    </li>
+                    <li onclick="show_wechat()">
+                        <a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}" alt="微信" srcset=""></a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="classify-name">
+            {% for class in classes %}
+            {% if class['class_name'] == tag %}
+            <a href="/home?tag={{class['class_name']}}"> <span class="layui-badge layui-bg-red tag-classify">{{class['class_name']}}</span></a>         
+            {% else %}
+            <a href="/home?tag={{class['class_name']}}"> <span class="layui-badge layui-bg-gray tag-classify">{{class['class_name']}}</span></a> 
+            {% endif%}
+            {%endfor%}
+        </div>
+    </div>
+    <div class="recommend">
+        <div class="recommend-name">
+            推荐文章
+        </div>
+        <div class="recommend-news">
+            {% for recommend_article in recommend%}
+            <div class="recommend-content">
+                <a href="/page?title={{recommend_article['title']}}">{{recommend_article['title']}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{%endblock%} {%block script%}
+<script src="{{url_for('static',filename='js/star.js')}}"></script>
+<script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
+<script src="{{url_for('static',filename='js/wchat.js')}}"></script>
+<script>
+    const wechatJson = {
+        "title": "微信二维码", //相册标题
+        "id": 01, //相册id
+        "start": 0, //初始显示的图片序号，默认0
+        "data": [ //相册包含的图片，数组格式
+            {
+                "alt": "二维码",
+                "pid": 01, //图片id
+                "src": wchat, //原图地址
+                "thumb": wchat //缩略图地址
+            }
+        ]
+    }
+
+    function show_wechat() {
+        layer.photos({
+            photos: wechatJson,
+            anim: 2
+        })
+    }
+</script>
+{%endblock%}

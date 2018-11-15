@@ -17,7 +17,6 @@
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
-        <li><a href="/classfiy">文章分类</a></li>
         <li><a href="">开源项目</a></li>
         <li><a href="/comment">写下留言</a></li>
         <li><a href="/about">关于我的</a></li>
@@ -34,7 +33,7 @@
         <div class="title">
             <label class="layui-form-label">类别</label>
             <div class="layui-input-block">
-                <input type="text" name="classfiy" value id='article-classfiy' required lay-verify="required" placeholder="请输入类别" autocomplete="off" class="layui-input">
+                <input type="text" name="classfiy"  value id='article-classfiy' required lay-verify="required" placeholder="请输入类别"  class="layui-input">
             </div>
         </div>
         <div class="title">
@@ -71,6 +70,8 @@
 <script src="{{url_for('static',filename='editor/js/editormd.min.js')}}"></script>
 <script src="{{url_for('static',filename='js/wchat.js')}}"></script>
 <script src="{{url_for('static',filename='js/Ecalendar.jquery.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/jquery.autocomplete.js')}}"></script>
+
 <script>
     const wechatJson = {
         "title": "微信二维码", //相册标题
@@ -86,6 +87,12 @@
         ]
     }
     $(function() {
+    $('#article-classfiy').autocomplete({
+        serviceUrl:'/create/autocomplete',
+        onSelect: function (suggestion) {
+            
+        }
+    });
         $("#ECalendar_case").ECalendar({
             type: "time",
             stamp: false,

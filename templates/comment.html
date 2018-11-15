@@ -2,10 +2,12 @@
 <link rel="stylesheet" href="{{ url_for('static',filename='css/comment.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='barrager/css/barrager.css')}}">
 <link rel="stylesheet" href="{{ url_for('static',filename='layui/css/layui.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/wall.css')}}">
 <title>写下留言</title>
 {%endblock%} {% block content%}
 <canvas id="space">
 </canvas>
+<div id="containers" class="containers"></div>
 <div class="devaloper-info">
     <h1>MESSAGE BOARD</h1>
     <h5>Fan Hao Tian</h5>
@@ -17,7 +19,6 @@
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
-        <li><a href="/classfiy">文章分类</a></li>
         <li><a href="/project">开源项目</a></li>
         <li><a href="">写下留言</a></li>
         <li><a href="/about">关于我的</a></li>
@@ -76,12 +77,25 @@
 
         </div>
     </div>
+    <div class="recommend">
+        <div class="recommend-name">
+            推荐文章
+        </div>
+        <div class="recommend-news">
+            {% for recommend_article in recommend%}
+            <div class="recommend-content">
+                <a href="/page?title={{recommend_article['title']}}">{{recommend_article['title']}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock%} {%block script%}
 <script src="{{url_for('static',filename='js/star.js')}}"></script>
 <script src="{{url_for('static',filename='layui/layui.all.js')}}"></script>
 <script src="{{url_for('static',filename='js/wchat.js')}}"></script>
 <script src="{{url_for('static',filename='barrager/js/jquery.barrager.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/barrageWall.js')}}"></script>
 <script>
     function jQuery1124024789348498718655_1539070661333(data) {
         window.commentList = data
@@ -103,50 +117,74 @@
             }
         ]
     }
-    window.onload = function() {
+    window.onload = function(){
         let list = window.commentList.results.parents
-        let barragerList = []
-        let personList = []
-        let tags = ''
-        for (let index = 0; index < list.length; index++) {
+        let barragerList = [];
+        list.forEach(item=>{
             barragerList.push({
-                info: list[index].content,
-                img: list[index].memberIcon,
-                speed: 20,
-                href: 'http://localhost:9999/comment/', //链接
-                color: '#fff', //颜色,默认白色 
-                old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+                'img':item.memberIcon,
+                'content':item.content.replace(/(^\s*)|(\s*$)/g, ""),
+                'name':item.name
             })
-            personList.push(list[index].name)
-        }
-        person = new Set(personList)
-        person = [...person]
-        console.log(person)
-        person.forEach(element => {
-            tags += `<span class="layui-badge layui-bg-gray tag-classify">${element}</span>`
-        });
-        let looper_time = parseInt(Math.random * 15) * 1000;
-        let run_once = true;
-        let index = 0;
-        if (barragerList.length > 0) {
-            barrager();
-            $('.classify-name').html(tags)
-        }
-
-        function barrager() {
-            if (run_once) {
-                //如果是首次执行,则设置一个定时器,并且把首次执行置为false
-                looper = setInterval(barrager, looper_time);
-                run_once = false;
-            }
-            $('body').barrager(barragerList[index]);
-            index++;
-            if (index == barragerList.length) {
-                clearInterval(looper)
-                return false;
-            }
-        }
+        })
+     var option={
+      container:"#containers",//弹幕墙的id
+      barrageLen:10//弹幕的行数
     }
+    barrageWall.init(option);//初始化弹幕墙
+    let num = 0;
+    let Timer = setInterval(()=>{
+        if( num < barragerList.length){
+            barrageWall.upWall(barragerList[num].img,barragerList[num].name,barragerList[num].content)
+        }else{
+            clearInterval(Timer);
+        }
+        num++;
+    },2000)
+    }
+    // window.onload = function() {
+    //     let list = window.commentList.results.parents
+    //     let barragerList = []
+    //     let personList = []
+    //     let tags = ''
+    //     for (let index = 0; index < list.length; index++) {
+    //         barragerList.push({
+    //             info: list[index].content,
+    //             img: list[index].memberIcon,
+    //             speed: 20,
+    //             href: 'http://localhost:9999/comment/', //链接
+    //             color: '#D60036', //颜色,默认白色 
+    //             old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色 
+    //         })
+    //         personList.push(list[index].name)
+    //     }
+    //     person = new Set(personList)
+    //     person = [...person]
+    //     person.forEach(element => {
+    //         tags += `<span class="layui-badge layui-bg-gray tag-classify">${element}</span>`
+    //     });
+    //     let looper_time = parseInt(Math.random * 15) * 1000;
+    //     let run_once = true;
+    //     let index = 0;
+    //     if (barragerList.length > 0) {
+    //         barrager();
+    //         $('.classify-name').html(tags)
+    //     }
+
+    //     function barrager() {
+    //         if (run_once) {
+    //             //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+    //             looper = setInterval(barrager, looper_time);
+    //             run_once = false;
+    //         }
+    //         $('body').barrager(barragerList[index]);
+    //         index++;
+    //         if (index == barragerList.length) {
+    //             clearInterval(looper)
+    //             return false;
+    //         }
+    //     }
+    // }
 
     function show_wechat() {
         layer.photos({

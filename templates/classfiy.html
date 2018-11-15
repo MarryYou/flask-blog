@@ -53,7 +53,20 @@
             </div>
         </div>
         <div class="classify-name">
-
+        {% for class in classes %}
+            <span class="layui-badge layui-bg-gray tag-classify">{{class['class_name']}}</span> {%endfor%}
+        </div>
+    </div>
+    <div class="recommend">
+        <div class="recommend-name">
+            推荐文章
+        </div>
+        <div class="recommend-news">
+            {% for recommend_article in recommend%}
+            <div class="recommend-content">
+                <a href="/page?title={{recommend_article['title']}}">{{recommend_article['title']}}</a>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

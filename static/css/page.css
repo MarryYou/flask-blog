@@ -319,8 +319,43 @@ footer {
 }
 
 .article-content img {
-    width: 80%;
+    width: 100%;
     display: block;
     padding: 0;
     margin: 10px 0;
+}
+
+.recommend {
+    float: right;
+    width: 25%;
+    background-color: #fff;
+    border: 1px solid #e7eaf1;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    box-shadow: 0 1px 3px rgba(0, 37, 55, 0.06);
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+.recommend-name {
+    font-size: 14px;
+    color: #333;
+    padding: 20px 20px 5px 20px;
+    line-height: 1.5;
+    border-bottom: 1px solid #e7eaf1;
+}
+
+.recommend-content {
+    padding: 6px 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.recommend-content a {
+    text-decoration: none;
+}
+
+.recommend-content .art-time {
+    font-size: 10px;
 }

@@ -16,7 +16,6 @@
     </div>
     <ul>
         <li><a href="/"> 主页</a></li>
-        <li><a href="/classfiy">文章分类</a></li>
         <li><a href="">开源项目</a></li>
         <li><a href="/comment">写下留言</a></li>
         <li><a href="/about">关于我的</a></li>
@@ -74,13 +73,16 @@
             <div class="person-info-link">
                 <ul>
                     <li>
-                        <a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}" alt="掘金" srcset=""></a>
+                        <a target="_blank" href="https://juejin.im/user/59c8ea816fb9a00a4746e258"> <img src="{{url_for('static',filename='img/juejin.png')}}"
+                                alt="掘金" srcset=""></a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}" alt="github" srcset=""></a>
+                        <a target="_blank" href="https://github.com/MarryYou"> <img src="{{url_for('static',filename='img/github.png')}}"
+                                alt="github" srcset=""></a>
                     </li>
                     <li onclick="show_wechat()">
-                        <a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}" alt="微信" srcset=""></a>
+                        <a target="_blank" href="javascript:;"> <img src="{{url_for('static',filename='img/wechat.png')}}"
+                                alt="微信" srcset=""></a>
                     </li>
                 </ul>
             </div>
@@ -90,6 +92,18 @@
             <span class="layui-badge layui-bg-gray tag-classify">
                 <a style='text-decoration: none;' target='_blank' href="{{project['url']}}">{{project['title']}}</a>
             </span> {% endfor %}
+        </div>
+    </div>
+    <div class="recommend">
+        <div class="recommend-name">
+            推荐文章
+        </div>
+        <div class="recommend-news">
+            {% for recommend_article in recommend%}
+            <div class="recommend-content">
+                <a href="/page?title={{recommend_article['title']}}">{{recommend_article['title']}}</a>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
