@@ -9,8 +9,11 @@ creates = Blueprint("/create", __name__)
 
 database = DataBaseClient("localhost", port=27017)
 
+from app import basic_auth
+
 
 @creates.route("/", methods=["GET", "POST"])
+@basic_auth.required
 def main():
     if request.method == "GET":
         return render_template("create.html")

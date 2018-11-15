@@ -1,0 +1,43 @@
+Flask web博客搭建（一）
+
+博客开发
+
+https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1775381540,4124716563&fm=26&gp=0.jpg
+
+今天我在这里给大家带来一个简易的flask 博客开发教程。python为我们熟知的新语言，falsk 是基于python的web框架，特性是灵活，方便，插件丰富。
+
+### Flask web博客搭建（一）
+#### Flask简介
+Flask是一个使用 Python 编写的轻量级 Web 应用框架。其 WSGI 工具箱采用 Werkzeug ，模板引擎则使用 Jinja2 。Flask使用 BSD 授权。
+Flask也被称为 “microframework” ，因为它使用简单的核心，用 extension 增加其他功能。Flask没有默认使用的数据库、窗体验证工具。
+#### Flask 安装
+Flask 依赖两个外部库：Werkzeug 和 Jinja2 。 Werkzeug 是一个 WSGI（在 Web 应用和多种服务器之间的标准 Python 接口) 工具集。Jinja2 负责渲染模板。本文介绍的是基于python 3.x的 flask 搭建。
+##### 虚拟环境
+- **virtualenv** 
+virtualenv 为每个不同项目提供一份 Python 安装。它并没有真正安装多个 Python 副本，但是它确实提供了一种巧妙的方式来让各项目环境保持独立。
+linux 或者 Mac 用：
+```shell
+sudo pip install virtualenv
+```
+上述的命令会在你的系统中安装 virtualenv。它甚至可能会存在于包管理器中， 如果你用的是 Ubuntu，可以尝试：
+```shell
+sudo apt-get install python-virtualenv
+```
+virtualenv 安装完毕后，你可以立即打开 shell 然后创建你自己的环境。我通常创建一个项目文件夹，并在其下创建一个 venv 文件夹。
+```shell
+$ mkdir myproject
+$ cd myproject
+```
+创建一个独立的Python运行环境，命名为venv -p自定义python版本：
+```shell
+sudo virtualenv -p python某版本 venv
+```
+启动命令是：
+```shell
+sudo cd xxx(环境所在的目录)
+sudo source bin/activate
+```
+关闭命令是：
+```shell
+sudo cd xxx(环境所在的目录)
+sudo deactivate
