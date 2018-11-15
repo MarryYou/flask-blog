@@ -87,7 +87,7 @@ def autocomplete():
 
 
 def main():
-    app.run(host="localhost", port=9999, debug=True)
+    app.run(host="0.0.0.0", port=3366, debug=True)
 
 
 if __name__ == "__main__":
