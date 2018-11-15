@@ -17,7 +17,7 @@ def main():
         pagesize = 10
         database.setDB("owner_classify")
         database.setCollection("class")
-        classes = 
+        classes = database.get_many({})
         recommend = get_new_article()
         client = pymongo.MongoClient()
         db = client["owner_article"]
