@@ -21,7 +21,7 @@ def main():
         article = json.loads(request.get_data())
         database.setDB("owner_classify")
         database.setCollection("class")
-        data = database.get_one({"class_name": article["classfiy"]})
+        data = database.get_many({"class_name": article["classfiy"]})
         if len(data) == 0:
             database.add_one({"class_name": article["classfiy"]})
         database.setDB("owner_article")
