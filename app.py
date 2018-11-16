@@ -16,6 +16,14 @@ import os
 import json
 import re
 import pymongo
+
+# 并发版tornado
+from tornado.wsgi import WSGIContainer
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+
+######################
+
 from common.database import DataBaseClient
 
 database = DataBaseClient("localhost", port=27017)
@@ -88,6 +96,9 @@ def admin():
 
 def main():
     app.run(debug=True)
+    server = HTTPServer(WSGIContainer(app))
+    server.listen(port=3366, address="0.0.0.0")
+    IOLoop.instance().start()
 
 
 if __name__ == "__main__":
