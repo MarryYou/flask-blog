@@ -95,7 +95,7 @@ def admin():
 
 
 def main():
-    app.run(debug=True)
+    # app.run(debug=True)
     server = HTTPServer(WSGIContainer(app))
     server.listen(port=3366, address="0.0.0.0")
     IOLoop.instance().start()
