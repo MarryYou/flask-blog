@@ -1,3 +1,4 @@
-http://sunfusheng.com/ ����
+http://sunfusheng.com/ 博客模板
 https://www.layui.com/doc/modules/laypage.html#use layui
 http://pandao.github.io/editor.md/ markdown
+https://dcc.godaddy.com 域名管理地址
