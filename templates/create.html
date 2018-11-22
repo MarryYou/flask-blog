@@ -51,7 +51,8 @@
         <div class="title">
             <label class="layui-form-label">日期</label>
             <div class="layui-input-block">
-                <input type="text" name="date" required lay-verify="required" id="ECalendar_case" value="" placeholder="请选择日期" autocomplete="off" class="layui-input ECalendar">
+                <input type="text" class="layui-input" id="date" placeholder="yyyy-MM-dd HH:mm:ss">
+                <!-- <input type="text" name="date" required lay-verify="required" id="ECalendar_case" value="" placeholder="请选择日期" autocomplete="off" class="layui-input ECalendar"> -->
             </div>
         </div>
         <div id="article-editormd"></div>
@@ -93,15 +94,14 @@
             
         }
     });
-        $("#ECalendar_case").ECalendar({
-            type: "time",
-            stamp: false,
-            skin: 5,
-            format: "yyyy年mm月dd日 hh时ii分",
-            callback: function(v, e) {
-                $(this).val(v)
-            }
-        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+              laydate.render({
+                elem: '#date'
+                ,type: 'datetime'
+            });
+  
+        })
         var createEditor;
         const layer = layui.layer;
         createEditor = editormd("article-editormd", {
@@ -159,12 +159,12 @@
             if ($('#article-title').val().trim().length > 0 &
                 $('#article-classfiy').val().trim().length > 0 &
                 $('#article-desc').val().trim().length > 0 &
-                $('#ECalendar_case').val().trim().length > 0 &
+                $('#date').val().trim().length > 0 &
                 createEditor.getHTML().length > 0) {
                 data = JSON.stringify({
                     'title': $('#article-title').val().trim(),
                     'classfiy': $('#article-classfiy').val().trim(),
-                    'date': $('#ECalendar_case').val().trim(),
+                    'date': $('#date').val().trim(),
                     'id': 'art-' + new Date().getTime(),
                     'desc': $('#article-desc').val().trim(),
                     'cover': $('#article-cover').val().trim() || '',
